@@ -2,10 +2,10 @@
 
 include_once 'functions.php';
 
-$username = "alqteam_admin";
-$password = "jkgb69#123.x";
-$hostname = "hangus.com.br";
-$dbname = "alqteam_sc2stats";
+$username = "";
+$password = "";
+$hostname = "";
+$dbname = "";
 
 $conn = mysql_connect($hostname, $username, $password)
 or die("Unable to connect to MySQL");
