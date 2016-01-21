@@ -1,0 +1,185 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton title="#{messages['button.new']}" icon="ui-icon-document" action="#{playerListMB.getNextView}"
+						actionListener="#{playerListMB.clear}" ajax="false" />
+
+					<p:commandButton title="#{messages['button.delete']}" icon="ui-icon-trash" onclick="confirmation.show()"
+						type="button" immediate="true" ajax="false" />
+
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.alert']}!" severity="alert" widgetVar="confirmation">
+
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{playerListMB.deleteSelection}"
+							actionListener="#{playerListMB.clear}" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:dataTable id="list" var="bean" value="#{playerListMB.resultList}" rows="10" paginator="true" editable="true" >
+				<f:facet name="header">#{messages['player.list.table.title']}</f:facet>
+				<p:column style="width:2%;">
+					<h:selectBooleanCheckbox value="#{playerListMB.selection[bean.id]}"></h:selectBooleanCheckbox>
+				</p:column>
+				
+				<p:column style="width:5%;" sortBy="#{bean.id}">
+					<f:facet name="header">#{messages['player.label.id']}</f:facet>
+					<h:outputText value="#{bean.id}" />
+				</p:column>
+						
+				<p:column sortBy="#{bean.player}">
+					<f:facet name="header">#{messages['player.label.player']}</f:facet>
+	
+					<p:cellEditor>
+		               <f:facet name="output"><h:outputText value="#{bean.player}" /></f:facet>
+		               <f:facet name="input"><p:inputText value="#{bean.player}" style="width:100%" label="Player"/></f:facet>
+		           </p:cellEditor>					
+				</p:column>
+					
+				<p:column sortBy="#{bean.perfil}">
+					<f:facet name="header">#{messages['player.label.perfil']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.perfil}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.nome}">
+					<f:facet name="header">#{messages['player.label.nome']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.nome}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.portraitX}">
+					<f:facet name="header">#{messages['player.label.portraitX']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.portraitX}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.portraitY}">
+					<f:facet name="header">#{messages['player.label.portraitY']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.portraitY}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.achievementPoints}">
+					<f:facet name="header">#{messages['player.label.achievementPoints']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.achievementPoints}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.totalCareerGames}">
+					<f:facet name="header">#{messages['player.label.totalCareerGames']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.totalCareerGames}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.oldGames}">
+					<f:facet name="header">#{messages['player.label.oldGames']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.oldGames}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.highestSoloTimes}">
+					<f:facet name="header">#{messages['player.label.highestSoloTimes']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.highestSoloTimes}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.highestSoloLeague}">
+					<f:facet name="header">#{messages['player.label.highestSoloLeague']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.highestSoloLeague}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.highestTeamTimes}">
+					<f:facet name="header">#{messages['player.label.highestTeamTimes']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.highestTeamTimes}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.highestTeamLeague}">
+					<f:facet name="header">#{messages['player.label.highestTeamLeague']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.highestTeamLeague}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.ativo}">
+					<f:facet name="header">#{messages['player.label.ativo']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.ativo}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.portraitUrl}">
+					<f:facet name="header">#{messages['player.label.portraitUrl']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.portraitUrl}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.swarmLevel}">
+					<f:facet name="header">#{messages['player.label.swarmLevel']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.swarmLevel}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.actualLeague}">
+					<f:facet name="header">#{messages['player.label.actualLeague']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.actualLeague}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.iaWins}">
+					<f:facet name="header">#{messages['player.label.iaWins']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.iaWins}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+				<p:column sortBy="#{bean.iaLoss}">
+					<f:facet name="header">#{messages['player.label.iaLoss']}</f:facet>
+					<h:commandLink action="#{playerListMB.getNextView}" actionListener="#{playerListMB.clear}">
+						<h:outputText value="#{bean.iaLoss}" />
+						<f:param name="id" value="#{bean.id}" />
+					</h:commandLink>
+				</p:column>
+					
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

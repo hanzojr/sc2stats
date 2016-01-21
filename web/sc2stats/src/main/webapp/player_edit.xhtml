@@ -1,0 +1,169 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{playerEditMB.insert}"
+						rendered="#{!playerEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{playerEditMB.update}"
+						rendered="#{playerEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{playerEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{playerEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['player.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fieldsplayer" columns="3">
+				
+					
+					<h:outputLabel value="#{messages['player.label.player']}: " for="player" styleClass="text-input" />
+					
+					<h:inputText id="player" value="#{playerEditMB.bean.player}"
+						title="#{messages['player.alt.player']}" required="true" requiredMessage="Preto, va tomar!!"/>
+					
+					<p:message for="player" />
+						
+					<h:outputLabel value="#{messages['grupo.label']}: " for="grupo" styleClass="text-input" />
+				    <p:selectOneMenu id="grupo" value="#{playerEditMB.bean.grupo}"  effect="fade" converter="ConversorGrupo">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItems value="#{playerEditMB.grupoList}" var="varGrupo" itemLabel="#{varGrupo.id}"  itemValue="#{varGrupo}" />						
+					</p:selectOneMenu>
+					<p:message for="grupo" />								  
+								 
+					<h:outputLabel value="#{messages['player.label.perfil']}: " for="perfil" styleClass="text-input" />
+					
+					<h:inputText id="perfil" value="#{playerEditMB.bean.perfil}"
+						title="#{messages['player.alt.perfil']}" />
+					
+					<p:message for="perfil" />
+						
+					<h:outputLabel value="#{messages['player.label.nome']}: " for="nome" styleClass="text-input" />
+					
+					<h:inputText id="nome" value="#{playerEditMB.bean.nome}"
+						title="#{messages['player.alt.nome']}" />
+					
+					<p:message for="nome" />
+						
+					<h:outputLabel value="#{messages['player.label.portraitX']}: " for="portraitX" styleClass="text-input" />
+					
+					<h:inputText id="portraitX" value="#{playerEditMB.bean.portraitX}"
+						title="#{messages['player.alt.portraitX']}" />
+					
+					<p:message for="portraitX" />
+						
+					<h:outputLabel value="#{messages['player.label.portraitY']}: " for="portraitY" styleClass="text-input" />
+					
+					<h:inputText id="portraitY" value="#{playerEditMB.bean.portraitY}"
+						title="#{messages['player.alt.portraitY']}" />
+					
+					<p:message for="portraitY" />
+						
+					<h:outputLabel value="#{messages['player.label.achievementPoints']}: " for="achievementPoints" styleClass="text-input" />
+					
+					<h:inputText id="achievementPoints" value="#{playerEditMB.bean.achievementPoints}"
+						title="#{messages['player.alt.achievementPoints']}" />
+					
+					<p:message for="achievementPoints" />
+						
+					<h:outputLabel value="#{messages['player.label.totalCareerGames']}: " for="totalCareerGames" styleClass="text-input" />
+					
+					<h:inputText id="totalCareerGames" value="#{playerEditMB.bean.totalCareerGames}"
+						title="#{messages['player.alt.totalCareerGames']}" />
+					
+					<p:message for="totalCareerGames" />
+						
+					<h:outputLabel value="#{messages['player.label.oldGames']}: " for="oldGames" styleClass="text-input" />
+					
+					<h:inputText id="oldGames" value="#{playerEditMB.bean.oldGames}"
+						title="#{messages['player.alt.oldGames']}" />
+					
+					<p:message for="oldGames" />
+						
+					<h:outputLabel value="#{messages['player.label.highestSoloTimes']}: " for="highestSoloTimes" styleClass="text-input" />
+					
+					<h:inputText id="highestSoloTimes" value="#{playerEditMB.bean.highestSoloTimes}"
+						title="#{messages['player.alt.highestSoloTimes']}" />
+					
+					<p:message for="highestSoloTimes" />
+						
+					<h:outputLabel value="#{messages['player.label.highestSoloLeague']}: " for="highestSoloLeague" styleClass="text-input" />
+					
+					<h:inputText id="highestSoloLeague" value="#{playerEditMB.bean.highestSoloLeague}"
+						title="#{messages['player.alt.highestSoloLeague']}" />
+					
+					<p:message for="highestSoloLeague" />
+						
+					<h:outputLabel value="#{messages['player.label.highestTeamTimes']}: " for="highestTeamTimes" styleClass="text-input" />
+					
+					<h:inputText id="highestTeamTimes" value="#{playerEditMB.bean.highestTeamTimes}"
+						title="#{messages['player.alt.highestTeamTimes']}" />
+					
+					<p:message for="highestTeamTimes" />
+						
+					<h:outputLabel value="#{messages['player.label.highestTeamLeague']}: " for="highestTeamLeague" styleClass="text-input" />
+					
+					<h:inputText id="highestTeamLeague" value="#{playerEditMB.bean.highestTeamLeague}"
+						title="#{messages['player.alt.highestTeamLeague']}" />
+					
+					<p:message for="highestTeamLeague" />
+						
+					<h:outputLabel value="#{messages['player.label.ativo']}: " for="ativo" styleClass="text-input" />
+					
+					<h:inputText id="ativo" value="#{playerEditMB.bean.ativo}"
+						title="#{messages['player.alt.ativo']}" />
+					
+					<p:message for="ativo" />
+						
+					<h:outputLabel value="#{messages['player.label.portraitUrl']}: " for="portraitUrl" styleClass="text-input" />
+					
+					<h:inputText id="portraitUrl" value="#{playerEditMB.bean.portraitUrl}"
+						title="#{messages['player.alt.portraitUrl']}" />
+					
+					<p:message for="portraitUrl" />
+						
+					<h:outputLabel value="#{messages['player.label.swarmLevel']}: " for="swarmLevel" styleClass="text-input" />
+					
+					<h:inputText id="swarmLevel" value="#{playerEditMB.bean.swarmLevel}"
+						title="#{messages['player.alt.swarmLevel']}" />
+					
+					<p:message for="swarmLevel" />
+						
+					<h:outputLabel value="#{messages['player.label.actualLeague']}: " for="actualLeague" styleClass="text-input" />
+					
+					<h:inputText id="actualLeague" value="#{playerEditMB.bean.actualLeague}"
+						title="#{messages['player.alt.actualLeague']}" />
+					
+					<p:message for="actualLeague" />
+						
+					<h:outputLabel value="#{messages['player.label.iaWins']}: " for="iaWins" styleClass="text-input" />
+					
+					<h:inputText id="iaWins" value="#{playerEditMB.bean.iaWins}"
+						title="#{messages['player.alt.iaWins']}" />
+					
+					<p:message for="iaWins" />
+						
+					<h:outputLabel value="#{messages['player.label.iaLoss']}: " for="iaLoss" styleClass="text-input" />
+					
+					<h:inputText id="iaLoss" value="#{playerEditMB.bean.iaLoss}"
+						title="#{messages['player.alt.iaLoss']}" />
+					
+					<p:message for="iaLoss" />
+						
+				</h:panelGrid>
+			</p:fieldset>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

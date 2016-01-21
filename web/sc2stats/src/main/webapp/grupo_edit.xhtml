@@ -1,0 +1,246 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets" template="/template/main.xhtml">
+
+	<ui:define name="body">
+		<h:form prependId="false">
+			<p:toolbar>
+				<p:toolbarGroup align="left">
+					<p:commandButton value="#{messages['button.save']}" action="#{grupoEditMB.insert}"
+						rendered="#{!grupoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.save']}" action="#{grupoEditMB.update}"
+						rendered="#{grupoEditMB.updateMode}" ajax="false" />
+					<p:commandButton value="#{messages['button.delete']}" onclick="confirmation.show()"
+						rendered="#{grupoEditMB.updateMode}" type="button" immediate="true" ajax="false" />
+					<p:confirmDialog message="#{messages['label.confirm.delete']}" showEffect="bounce" hideEffect="explode"
+						header="#{messages['label.dialog.delete']}" severity="alert" widgetVar="confirmation">
+						<h:commandButton value="#{messages['button.dialog.yes']}" action="#{grupoEditMB.delete}" immediate="true"
+							ajax="false" />
+						<h:commandButton value="#{messages['button.dialog.no']}" onclick="confirmation.hide()" type="button" />
+					</p:confirmDialog>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<br />
+
+			<p:fieldset legend="#{messages['grupo.label']}" toggleable="true" toggleSpeed="500">
+				<h:panelGrid id="fieldsgrupo" columns="3">
+				
+					<h:outputLabel value="#{messages['grupo.label.id']}: " for="id" styleClass="text-input" />
+										
+					<h:outputText id="id" value="#{grupoEditMB.bean.id}" />
+					
+					<p:message for="id" />
+						
+					<h:outputLabel value="#{messages['grupo.label.nome']}: " for="nome" styleClass="text-input" />
+					
+					<h:inputText id="nome" value="#{grupoEditMB.bean.nome}"
+						title="#{messages['grupo.alt.nome']}" />
+					
+					<p:message for="nome" />
+						
+					<h:outputLabel value="#{messages['grupo.label.dtModify']}: " for="dtModify" styleClass="text-input" />
+					
+					<p:calendar id="dtModify" value="#{grupoEditMB.bean.dtModify}"
+					   pattern="#{messages['label.date.pattern']}" navigator="true" showButtonPanel="true"
+					   locale="#{locales.currentLocale}" title="#{messages['grupo.alt.dtModify']}" />
+							 
+					<p:message for="dtModify" />
+						
+					<h:outputLabel value="#{messages['grupo.label.txModify']}: " for="txModify" styleClass="text-input" />
+					
+					<h:inputText id="txModify" value="#{grupoEditMB.bean.txModify}"
+						title="#{messages['grupo.alt.txModify']}" />
+					
+					<p:message for="txModify" />
+						
+				</h:panelGrid>
+			</p:fieldset>
+			
+		<p:fieldset legend="#{messages['player.label']}" toggleable="true" toggleSpeed="500">
+			<h:panelGrid id="fieldsplayer" columns="1"> 
+				<p:commandButton value="#{messages['button.new']}" action="#{grupoEditMB.addPlayer}" update="listPlayer"/>
+				<p:dataTable id="listPlayer" var="player" value="#{grupoEditMB.playerList}" rowIndexVar="index">
+						
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.id']}: " for="id" styleClass="text-input" />
+						    
+			           <h:outputText id="id" value="#{player.id}" />
+				             
+					   <p:message for="id" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.player']}: " for="player" styleClass="text-input" />
+						    
+			           <h:inputText id="player" value="#{player.player}"
+				          title="#{messages['player.alt.player']}" />
+						                   
+					   <p:message for="player" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.perfil']}: " for="perfil" styleClass="text-input" />
+						    
+			           <h:inputText id="perfil" value="#{player.perfil}"
+				          title="#{messages['player.alt.perfil']}" />
+						                   
+					   <p:message for="perfil" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.nome']}: " for="nome" styleClass="text-input" />
+						    
+			           <h:inputText id="nome" value="#{player.nome}"
+				          title="#{messages['player.alt.nome']}" />
+						                   
+					   <p:message for="nome" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.portraitX']}: " for="portraitX" styleClass="text-input" />
+						    
+			           <h:inputText id="portraitX" value="#{player.portraitX}"
+				          title="#{messages['player.alt.portraitX']}" />
+						                   
+					   <p:message for="portraitX" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.portraitY']}: " for="portraitY" styleClass="text-input" />
+						    
+			           <h:inputText id="portraitY" value="#{player.portraitY}"
+				          title="#{messages['player.alt.portraitY']}" />
+						                   
+					   <p:message for="portraitY" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.achievementPoints']}: " for="achievementPoints" styleClass="text-input" />
+						    
+			           <h:inputText id="achievementPoints" value="#{player.achievementPoints}"
+				          title="#{messages['player.alt.achievementPoints']}" />
+						                   
+					   <p:message for="achievementPoints" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.totalCareerGames']}: " for="totalCareerGames" styleClass="text-input" />
+						    
+			           <h:inputText id="totalCareerGames" value="#{player.totalCareerGames}"
+				          title="#{messages['player.alt.totalCareerGames']}" />
+						                   
+					   <p:message for="totalCareerGames" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.oldGames']}: " for="oldGames" styleClass="text-input" />
+						    
+			           <h:inputText id="oldGames" value="#{player.oldGames}"
+				          title="#{messages['player.alt.oldGames']}" />
+						                   
+					   <p:message for="oldGames" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.highestSoloTimes']}: " for="highestSoloTimes" styleClass="text-input" />
+						    
+			           <h:inputText id="highestSoloTimes" value="#{player.highestSoloTimes}"
+				          title="#{messages['player.alt.highestSoloTimes']}" />
+						                   
+					   <p:message for="highestSoloTimes" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.highestSoloLeague']}: " for="highestSoloLeague" styleClass="text-input" />
+						    
+			           <h:inputText id="highestSoloLeague" value="#{player.highestSoloLeague}"
+				          title="#{messages['player.alt.highestSoloLeague']}" />
+						                   
+					   <p:message for="highestSoloLeague" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.highestTeamTimes']}: " for="highestTeamTimes" styleClass="text-input" />
+						    
+			           <h:inputText id="highestTeamTimes" value="#{player.highestTeamTimes}"
+				          title="#{messages['player.alt.highestTeamTimes']}" />
+						                   
+					   <p:message for="highestTeamTimes" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.highestTeamLeague']}: " for="highestTeamLeague" styleClass="text-input" />
+						    
+			           <h:inputText id="highestTeamLeague" value="#{player.highestTeamLeague}"
+				          title="#{messages['player.alt.highestTeamLeague']}" />
+						                   
+					   <p:message for="highestTeamLeague" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.ativo']}: " for="ativo" styleClass="text-input" />
+						    
+			           <h:inputText id="ativo" value="#{player.ativo}"
+				          title="#{messages['player.alt.ativo']}" />
+						                   
+					   <p:message for="ativo" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.portraitUrl']}: " for="portraitUrl" styleClass="text-input" />
+						    
+			           <h:inputText id="portraitUrl" value="#{player.portraitUrl}"
+				          title="#{messages['player.alt.portraitUrl']}" />
+						                   
+					   <p:message for="portraitUrl" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.swarmLevel']}: " for="swarmLevel" styleClass="text-input" />
+						    
+			           <h:inputText id="swarmLevel" value="#{player.swarmLevel}"
+				          title="#{messages['player.alt.swarmLevel']}" />
+						                   
+					   <p:message for="swarmLevel" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.actualLeague']}: " for="actualLeague" styleClass="text-input" />
+						    
+			           <h:inputText id="actualLeague" value="#{player.actualLeague}"
+				          title="#{messages['player.alt.actualLeague']}" />
+						                   
+					   <p:message for="actualLeague" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.iaWins']}: " for="iaWins" styleClass="text-input" />
+						    
+			           <h:inputText id="iaWins" value="#{player.iaWins}"
+				          title="#{messages['player.alt.iaWins']}" />
+						                   
+					   <p:message for="iaWins" />
+			  	   </p:column>					  
+				
+			        <p:column>
+  			           <h:outputLabel value="#{messages['player.label.iaLoss']}: " for="iaLoss" styleClass="text-input" />
+						    
+			           <h:inputText id="iaLoss" value="#{player.iaLoss}"
+				          title="#{messages['player.alt.iaLoss']}" />
+						                   
+					   <p:message for="iaLoss" />
+			  	   </p:column>					  
+				
+				   <p:column>
+					   <f:facet name="header">#{messages['label.action']}</f:facet>
+					   <p:commandButton value="#{messages['button.delete']}" action="#{grupoEditMB.deletePlayer}" ajax="false"/>
+				   </p:column>
+				</p:dataTable>
+			</h:panelGrid>
+		</p:fieldset>
+						
+		</h:form>
+	</ui:define>
+</ui:composition>

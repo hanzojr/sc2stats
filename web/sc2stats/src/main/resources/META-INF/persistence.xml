@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+
+	<persistence-unit name="sc2stats-ds" transaction-type="RESOURCE_LOCAL">
+		<non-jta-data-source>java:jboss/datasources/sc2statsDS</non-jta-data-source>
+
+
+
+		<class>com.alqteam.sc2stats.domain.Grupo</class>
+		
+	
+		<class>com.alqteam.sc2stats.domain.Player</class>
+<properties>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.connection.useUnicode" value="true" />
+			<property name="hibernate.connection.characterEncoding" value="UTF-8" />
+			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />				
+		</properties>
+	</persistence-unit>
+
+
+
+</persistence>
